@@ -5,28 +5,36 @@
 <title>CoreScript</title>
 
 <link rel="stylesheet" href="style.css">
+
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
-
 </head>
+
 <body>
 
 <header>
-  <h1>CoreScript</h1>
+  <div class="logo">CoreScript</div>
   <nav>
+    <button onclick="showPage('home')">Home</button>
     <button onclick="showPage('downloads')">Downloads</button>
-    <button onclick="showPage('csx')">Extension Manager</button>
+    <button onclick="showPage('csx')">Extensions</button>
+    <button onclick="showPage('changelog')">Changelog</button>
     <button onclick="toggleTheme()">🌗</button>
   </nav>
 </header>
 
+<section id="hero">
+  <h1 id="typing"></h1>
+</section>
+
 <main>
-  <section id="downloads"></section>
+  <section id="home"></section>
+  <section id="downloads" hidden></section>
   <section id="csx" hidden></section>
-  <section id="viewer" hidden></section>
+  <section id="changelog" hidden></section>
 </main>
 
 <script src="app.js"></script>
