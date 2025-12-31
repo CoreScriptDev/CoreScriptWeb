@@ -1,46 +1,84 @@
 :root {
-  --bg: #ffffff;
-  --fg: #111;
-  --accent: #3b82f6;
+  --bg:#ffffff;
+  --fg:#0f172a;
+  --accent:#2563eb;
+  --border:#cbd5f5;
 }
 
 body.dark {
-  --bg: #0f172a;
-  --fg: #e5e7eb;
+  --bg:#020617;
+  --fg:#e5e7eb;
+  --border:#334155;
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: monospace;
-  margin: 0;
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:monospace;
+  transition:background .3s,color .3s;
 }
 
 header {
-  padding: 1rem;
-  border-bottom: 1px solid #444;
-  display: flex;
-  justify-content: space-between;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 2rem;
+  border-bottom:1px solid var(--border);
+}
+
+.logo {
+  font-size:1.4rem;
+  font-weight:bold;
 }
 
 button {
-  background: none;
-  color: var(--fg);
-  border: 1px solid var(--accent);
-  padding: 0.4rem 0.8rem;
-  cursor: pointer;
+  background:none;
+  color:var(--fg);
+  border:1px solid var(--accent);
+  padding:.4rem .8rem;
+  margin-left:.4rem;
+  cursor:pointer;
+}
+
+button:hover {
+  background:var(--accent);
+  color:white;
+}
+
+#hero {
+  padding:3rem 2rem;
+  font-size:2rem;
+}
+
+main section {
+  padding:2rem;
+  animation:fade .4s ease;
+}
+
+@keyframes fade {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:none; }
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
+  width:100%;
+  border-collapse:collapse;
 }
 
-td, th {
-  border-bottom: 1px solid #444;
-  padding: 0.5rem;
+th,td {
+  padding:.6rem;
+  border-bottom:1px solid var(--border);
+  text-align:left;
 }
 
 a {
-  color: var(--accent);
+  color:var(--accent);
+  cursor:pointer;
+}
+
+pre {
+  background:#020617;
+  padding:1rem;
+  overflow:auto;
 }
