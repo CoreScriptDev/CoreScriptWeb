@@ -3,12 +3,14 @@
   --fg:#0f172a;
   --accent:#2563eb;
   --border:#cbd5f5;
+  --code-bg:#f5f7fa;
 }
 
 body.dark {
   --bg:#020617;
   --fg:#e5e7eb;
   --border:#334155;
+  --code-bg:#020617;
 }
 
 body {
@@ -53,12 +55,19 @@ button:hover {
 
 main section {
   padding:2rem;
-  animation:fade .4s ease;
 }
 
-@keyframes fade {
-  from { opacity:0; transform:translateY(10px); }
-  to   { opacity:1; transform:none; }
+.reveal {
+  opacity:0;
+  transform:translateY(12px);
+  animation:reveal .6s ease forwards;
+}
+
+@keyframes reveal {
+  to {
+    opacity:1;
+    transform:none;
+  }
 }
 
 table {
@@ -69,7 +78,6 @@ table {
 th,td {
   padding:.6rem;
   border-bottom:1px solid var(--border);
-  text-align:left;
 }
 
 a {
@@ -78,7 +86,8 @@ a {
 }
 
 pre {
-  background:#020617;
+  background:var(--code-bg);
   padding:1rem;
+  border-radius:6px;
   overflow:auto;
 }
