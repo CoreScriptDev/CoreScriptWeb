@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CoreScript</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+
+</head>
+<body>
+
+<header>
+  <h1>CoreScript</h1>
+  <nav>
+    <button onclick="showPage('downloads')">Downloads</button>
+    <button onclick="showPage('csx')">Extension Manager</button>
+    <button onclick="toggleTheme()">🌗</button>
+  </nav>
+</header>
+
+<main>
+  <section id="downloads"></section>
+  <section id="csx" hidden></section>
+  <section id="viewer" hidden></section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
