@@ -1,0 +1,46 @@
+:root {
+  --bg: #ffffff;
+  --fg: #111;
+  --accent: #3b82f6;
+}
+
+body.dark {
+  --bg: #0f172a;
+  --fg: #e5e7eb;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: monospace;
+  margin: 0;
+}
+
+header {
+  padding: 1rem;
+  border-bottom: 1px solid #444;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background: none;
+  color: var(--fg);
+  border: 1px solid var(--accent);
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  border-bottom: 1px solid #444;
+  padding: 0.5rem;
+}
+
+a {
+  color: var(--accent);
+}
