@@ -3,9 +3,7 @@ const REPO   = "CoreScript";
 const BRANCH = "main";
 
 // ---------- Theme ----------
-if (localStorage.theme === "dark") {
-  document.body.classList.add("dark");
-}
+if (localStorage.theme === "dark") document.body.classList.add("dark");
 
 function toggleTheme() {
   document.body.classList.toggle("dark");
@@ -15,16 +13,17 @@ function toggleTheme() {
 
 // ---------- Navigation ----------
 function showPage(id) {
-  document.querySelectorAll("main section")
-    .forEach(s => s.hidden = true);
+  document.querySelectorAll("main section").forEach(s => s.hidden = true);
   document.getElementById(id).hidden = false;
 }
 
-// ---------- Typing Animation ----------
-function typeText(text, el, i = 0) {
+// ---------- Typing ----------
+function typeText(text, el, i = 0, done) {
   if (i <= text.length) {
     el.textContent = text.slice(0, i);
-    setTimeout(() => typeText(text, el, i + 1), 40);
+    setTimeout(() => typeText(text, el, i + 1, done), 40);
+  } else if (done) {
+    done();
   }
 }
 
@@ -33,12 +32,26 @@ typeText(
   document.getElementById("typing")
 );
 
+// ---------- Markdown Reveal ----------
+function revealMarkdown(container) {
+  const blocks = Array.from(container.children);
+  const total = Math.min(2000, Math.max(1000, blocks.length * 120));
+  const step = total / blocks.length;
+
+  blocks.forEach((el, i) => {
+    el.classList.add("reveal");
+    el.style.animationDelay = `${i * step}ms`;
+  });
+}
+
 // ---------- Markdown Loader ----------
 async function loadMarkdown(path, target) {
   const res = await fetch(
     `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${path}`
   );
+
   target.innerHTML = marked.parse(await res.text());
+  revealMarkdown(target);
   hljs.highlightAll();
 }
 
@@ -69,7 +82,7 @@ async function loadDownloads() {
     const md  = files.find(f => f.name === "README.md");
 
     html += `
-    <tr>
+    <tr class="reveal">
       <td>${v.name}</td>
       <td>${exe ? "Released" : "Not released"}</td>
       <td>${exe ? `<a href="${exe.download_url}" download>Download</a>` : "-"}</td>
@@ -88,10 +101,11 @@ async function openRelease(url) {
   const res = await fetch(url);
   home.innerHTML = marked.parse(await res.text());
   showPage("home");
+  revealMarkdown(home);
   hljs.highlightAll();
 }
 
-// ---------- CSC Syntax Highlight ----------
+// ---------- CSC Syntax ----------
 hljs.registerLanguage("csc", () => ({
   keywords: {
     keyword:
