@@ -60,12 +60,32 @@ loadMarkdown("README.md", home);
 loadMarkdown("CSX-Manual.md", csx);
 loadMarkdown("CHANGELOG.md", changelog);
 
+// ---------- SemVer (vX.Y.Z) ----------
+function normalizeVersion(v) {
+  return v.replace(/^v/i, "").split(".").map(Number);
+}
+
+function compareVersions(a, b) {
+  const pa = normalizeVersion(a);
+  const pb = normalizeVersion(b);
+
+  for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+    const diff = (pb[i] || 0) - (pa[i] || 0);
+    if (diff !== 0) return diff;
+  }
+  return 0;
+}
+
 // ---------- Downloads ----------
 async function loadDownloads() {
   const res = await fetch(
     `https://api.github.com/repos/${OWNER}/${REPO}/contents/builds`
   );
   const versions = await res.json();
+
+  const dirs = versions
+    .filter(v => v.type === "dir")
+    .sort((a, b) => compareVersions(a.name, b.name));
 
   let html = `
   <table>
@@ -76,7 +96,7 @@ async function loadDownloads() {
       <th>README</th>
     </tr>`;
 
-  for (const v of versions.filter(x => x.type === "dir")) {
+  for (const v of dirs) {
     const files = await (await fetch(v.url)).json();
     const exe = files.find(f => f.name.endsWith(".exe"));
     const md  = files.find(f => f.name === "README.md");
